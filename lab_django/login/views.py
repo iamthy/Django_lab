@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-
+from . import models
 # Create your views here.
 
 
@@ -13,8 +13,13 @@ def login(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
-        print(username, password)
-        return redirect('/index/')
+        if username.strip() and password:
+            try:
+                user = models.User.objects.get(name=username)#从数据库中根据用户名检索
+            except:
+                return render(request, 'login/login.html')#没有这个用户就返回登录界面
+            if (user.password == password): # 有的话还要检查密码是否正确
+                return redirect('/index/')
     return render(request, 'login/login.html')
 
 
