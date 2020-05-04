@@ -7,6 +7,21 @@ from . import models
 def index(request):
     if not request.session.get('is_login', None):
         return redirect('/login/')
+    if request.method == "POST":
+        date = request.POST.get('date')
+        #print(date)
+        message = '不是三个节日之一'
+        if date[5:7] == '01' and date[8:10] == '01':
+            message = '元旦节'
+            return render(request, 'login/index.html',{'message': message})
+        elif date[5:7] == '10' and date[8:10] == '01':
+            message = '国庆节'
+            return render(request, 'login/index.html',{'message': message})
+        elif date[5:7] == '12' and date[8:10] == '25':
+            message = '圣诞节'
+            return render(request, 'login/index.html',{'message': message})
+        else:
+            return render(request, 'login/index.html',{'message': message})
     return render(request, 'login/index.html')
 
 def login(request):

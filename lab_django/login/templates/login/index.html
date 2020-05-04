@@ -1,13 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>首页</title>
-</head>
-<body>
-<h1>{{ request.session.user_name }}!  欢迎回来！</h1>
-<p>
-    <a href="/logout/">登出</a>
-</p>
-</body>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>登录</title>
+  </head>
+  <body>
+    <div class="container">
+        <div class="col">
+            <form class="form-index" action="/index/" method="post">
+                {% if message %}
+                    <div class="alert alert-warning">{{ message }}</div>
+                {% endif %}
+                {% csrf_token %}
+                <h3 class="text-center">欢迎使用日期节日查询功能</h3>
+                <div class="form-group">
+                <label for="id_date">请输入日期：</label>
+                <input type="text" name='date' class="form-control" id="id_date" placeholder="日期格式:YYYY-MM-DD" autofocus required>
+            <div>
+                <button type="submit" class="btn btn-primary float-right">查询</button>
+                <a href="/logout/">退出登录</a>
+            </div>
+            </form>
+        </div>
+    </div> <!-- /container -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.15.0/umd/popper.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  </body>
 </html>
